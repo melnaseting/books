@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Books</title>
+</head>
+<body>
+    <h1>Books</h1>
+
+    <!-- Форма для додавання нового треку -->
+    <h2>Add New Book</h2>
+    <form action="/books/" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" name="autor" required><br><br>
+
+        <label for="count_page">Count of pages:</label>
+        <input type="text" id="count_page" name="count_page" required><br><br>
+
+        <button type="submit">Add Book</button>
+    </form>
+
+    <hr>
+
+    <!-- Список книг -->
+    <h2>Book List</h2>
+    <ul>
+    {% for book in books %}
+        <li>
+            <a href="/books/{{ book.id }}">{{ book.name }} by {{ book.autor }}</a>
+            <form action="/books/{{ book.id }}" method="post" style="display: inline-block;">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit">Delete</button>
+            </form>
+            <a href="/books/{{ book.id }}/show"><button>Show detales</button></a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
